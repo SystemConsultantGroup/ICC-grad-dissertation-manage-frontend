@@ -18,6 +18,7 @@ import {
   Button,
   Center,
   Group,
+  Input,
   Modal,
   Popover,
   Skeleton,
@@ -32,7 +33,8 @@ import { DepartmentSelect } from "@/components/common/selects/DepartmentSelect";
 import Pagination from "@/components/common/Pagination";
 import { useRouter } from "next/navigation";
 import { ClientAxios } from "@/api/ClientAxios";
-import { showNotificationSuccess } from "@/components/common/Notifications";
+import { showNotificationError, showNotificationSuccess } from "@/components/common/Notifications";
+import { logBulkDeletion } from "@/api/logBulkDeletion";
 import { REFRESH_DEFAULT_PAGE_NUMBER } from "../../_constants/page";
 import { STUDENTS_TABLE_HEADERS } from "../../_constants/table";
 import { TChangeQueryArg } from "../../_types/common";
@@ -97,7 +99,24 @@ function StudentListSection() {
     setPageNumber(REFRESH_DEFAULT_PAGE_NUMBER);
   }, [pageSize]);
 
+  const [confirmDeleteText, setConfirmDeleteText] = useState({
+    representative: "",
+    target: "",
+    confirm: "",
+  });
+
+  const confirmedDeleteText =
+    confirmDeleteText.representative.length >= 3 &&
+    confirmDeleteText.target.trim() === "전체학생 삭제" &&
+    confirmDeleteText.confirm.trim() === "삭제하겠습니다";
+
   const handleDelete = async () => {
+    try {
+      await logBulkDeletion("students", confirmDeleteText.representative);
+    } catch {
+      showNotificationError({ message: "삭제 기록을 남기지 못했습니다. 다시 시도해 주세요." });
+      return;
+    }
     try {
       await ClientAxios.delete(API_ROUTES.student.delete());
       showNotificationSuccess({ message: "학생 일괄 삭제 완료" });
@@ -113,14 +132,45 @@ function StudentListSection() {
         <Stack gap={36} align="center" p="lg">
           <IconAlertTriangle color="red" />
           <Group align="center" justify="center">
-            <Text fw={600}>주의! 전체 학생이 삭제됩니다.</Text>
-            <Text fw={600}>학생을 일괄 삭제하시겠습니까?</Text>
+            <Text fw={600}>
+              주의! 시스템 상 전체 학생이 삭제됩니다. 학과, 학년, 진행 연도를 무관하고 전부
+              삭제됩니다.
+            </Text>
+            <Text fw={600}>
+              계속하시려면 다음 입력창에 담당자 이름, &lsquo;전체학생 삭제&rsquo;, &lsquo;삭제하겠습니다&rsquo;을
+              작성해주십시오.
+            </Text>
+            <Input
+              value={confirmDeleteText.representative}
+              onChange={(e) =>
+                setConfirmDeleteText((o) => ({ ...o, representative: e.target.value }))
+              }
+              placeholder="일반대학원 학위논문시스템학과 홍길동"
+            />
+            <Input
+              value={confirmDeleteText.target}
+              onChange={(e) => setConfirmDeleteText((o) => ({ ...o, target: e.target.value }))}
+              placeholder="전체학생 삭제"
+            />
+            <Input
+              value={confirmDeleteText.confirm}
+              onChange={(e) => setConfirmDeleteText((o) => ({ ...o, confirm: e.target.value }))}
+              placeholder="삭제하겠습니다"
+            />
           </Group>
           <Group>
             <Button key="cancel" variant="outline" onClick={close}>
               취소
             </Button>
-            <Button key="delete" color="red" onClick={handleDelete}>
+            <Button
+              key="delete"
+              color="red"
+              disabled={!confirmedDeleteText}
+              onClick={() => {
+                if (!confirm("정말 삭제하시겠습니까?")) return;
+                handleDelete();
+              }}
+            >
               전체 삭제
             </Button>
           </Group>
