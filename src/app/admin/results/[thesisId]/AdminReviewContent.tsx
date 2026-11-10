@@ -1,11 +1,10 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { ClientAxios } from "@/api/ClientAxios";
 import { Status } from "@/api/_types/common";
 import { AdminReviewResponse, ThesisReview, UpdateReviewRequestBody } from "@/api/_types/reviews";
 import { transactionTask } from "@/api/_utils/task";
+import { uploadFile } from "@/api/_utils/uploadFile";
 import { API_ROUTES } from "@/api/apiRoute";
 import { ApiDownloadButton } from "@/components/common/Buttons";
 import { showNotificationError, showNotificationSuccess } from "@/components/common/Notifications";
@@ -22,7 +21,8 @@ import {
 import { AdminReviewList } from "@/components/pages/review/Review/ReviewList";
 import { StatusButtons } from "@/components/pages/review/Review/StatusButtons";
 import { Badge, Button, Modal, Space, Stack } from "@mantine/core";
-import { uploadFile } from "@/api/_utils/uploadFile";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export function AdminReviewListContent({ data }: { data: AdminReviewResponse }) {
   const [open, setOpen] = useState<boolean>(false);
@@ -165,7 +165,7 @@ function ModalContent({ open, setOpen, data, current }: ModalProps) {
             fileUUID = current.file.uuid ?? undefined;
           }
 
-          if (current.isFinal !== false) {
+          if (current.isFinal === false) {
             // 최종 심사가 아닌경우, 둘 다 확인
             if (thesis === "UNEXAMINED" || presentation === "UNEXAMINED") {
               showNotificationError({ message: "합격 여부를 선택해주세요." });

@@ -30,7 +30,7 @@ export type AchievementAuthorTypeLookupTable = Record<AchievementAuthorType, str
 export const ACHIEVEMENT_TYPE_LOOKUP_TABLE: AchievementTypeLookupTable = {
   SCI: "SCI",
   SCOPUS: "SCOPUS",
-  SCIE: "우수국제(Top-Tier 학술대회(Top-tier Conference list)",
+  SCIE: "우수국제(Top-Tier) 학술대회(Top-tier Conference list)",
   INTERNATIONAL_B: "국제 B급 학술지(International B Journal)",
   DOMESTIC_A: "KCI 등재지(KCI Journal)",
   DOMESTIC_B: "국내 B급 학술지(Domestic B Journal)",

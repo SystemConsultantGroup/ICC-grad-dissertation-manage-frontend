@@ -38,7 +38,7 @@ export function ProfessorReviewResult({ previous }: Pick<ProfessorReviewProps, "
       <RowGroup>
         <BasicRow field="구두심사 합격 여부">
           <BasicRow.Text>
-            <b>{textForStatus(previous.contentStatus)}</b>
+            <b>{textForStatus(previous.presentationStatus)}</b>
           </BasicRow.Text>
         </BasicRow>
       </RowGroup>
