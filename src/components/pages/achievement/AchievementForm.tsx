@@ -1,16 +1,6 @@
 import { BasicRow, RowGroup } from "@/components/common/rows";
 import { DATE_FORMAT } from "@/constants/date";
-import {
-  Button,
-  ComboboxData,
-  Group,
-  InputBase,
-  Modal,
-  NumberInput,
-  Select,
-  Stack,
-  Text,
-} from "@mantine/core";
+import { Button, Group, InputBase, Modal, NumberInput, Select, Stack, Text } from "@mantine/core";
 import { IMaskInput } from "react-imask";
 import { DateInput } from "@mantine/dates";
 import { IconCalendar } from "@tabler/icons-react";
@@ -23,12 +13,9 @@ import {
 import { UseFormReturnType } from "@mantine/form";
 import { ClientAxios } from "@/api/ClientAxios";
 import { API_ROUTES } from "@/api/apiRoute";
-import { showNotificationError, showNotificationSuccess } from "@/components/common/Notifications";
+import { showNotificationSuccess } from "@/components/common/Notifications";
 import { useParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { useProfessors } from "@/api/SWR";
-import { PAGE_NUMBER_GET_ALL, PAGE_SIZE_GET_ALL } from "@/constants/pagination";
-import { SelectedProfessor } from "../AdminStudentForm/_types/AdminStudentForm";
+import { useState } from "react";
 
 export interface AchievementFormInput {
   performance: AchievementType;
@@ -49,7 +36,7 @@ interface Props {
 }
 
 function AchievementForm({ form, handleSubmit, isEdit, isAdmin }: Props) {
-  const { onSubmit, getInputProps, values } = form;
+  const { onSubmit, getInputProps } = form;
   const [isDeleting, setIsDeleting] = useState(false);
   const router = useRouter();
   const { id } = useParams();

@@ -5,7 +5,7 @@ import BasicRow from "@/components/common/rows/BasicRow/BasicRow";
 import ButtonRow from "@/components/common/rows/ButtonRow/ButtonRow";
 import { RowGroup } from "@/components/common/rows";
 import { useAuth } from "@/components/common/AuthProvider";
-import { isNotEmpty, useForm } from "@mantine/form";
+import { useForm } from "@mantine/form";
 import { Department } from "@/api/_types/department";
 import { useState } from "react";
 import { ClientAxios } from "@/api/ClientAxios";

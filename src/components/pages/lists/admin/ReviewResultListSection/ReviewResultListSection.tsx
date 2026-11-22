@@ -13,7 +13,7 @@ import { useRouter } from "next/navigation";
 import { ChangeEvent, useEffect, useState } from "react";
 import { ActionIcon, Button, Center, Group, Popover, Select, Skeleton, Stack } from "@mantine/core";
 import { SectionHeader } from "@/components/common/SectionHeader";
-import { IconDownload, IconRotate } from "@tabler/icons-react";
+import { IconDownload } from "@tabler/icons-react";
 import { Table } from "@/components/common/Table";
 import Pagination from "@/components/common/Pagination";
 import { DepartmentSelect } from "@/components/common/selects/DepartmentSelect";

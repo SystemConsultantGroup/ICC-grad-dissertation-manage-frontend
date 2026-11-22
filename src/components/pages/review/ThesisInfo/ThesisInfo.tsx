@@ -1,7 +1,7 @@
 import { Badge, Stack } from "@mantine/core";
 import { ApiFileRow, BasicRow, LongContentRow, RowGroup, TitleRow } from "@/components/common/rows";
 import { File } from "@/api/_types/file";
-import { REVIEWER_ROLE_LOOKUP_TABLE, ReviewerRole } from "@/api/_types/reviews";
+import { ReviewerRole } from "@/api/_types/reviews";
 
 export type Stage = "PRELIMINARY" | "MAIN" | "REVISION";
 

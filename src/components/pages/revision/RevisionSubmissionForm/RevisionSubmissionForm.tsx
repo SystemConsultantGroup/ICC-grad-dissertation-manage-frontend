@@ -27,11 +27,7 @@ interface RevisionSubmissionFormInputs {
 
 function RevisionSubmissionForm() {
   const { user } = useAuth();
-  const { data: main, isLoading: isMainLoading } = useThesis(
-    user?.id || 0,
-    { type: "main" },
-    !!user
-  );
+  const { data: main } = useThesis(user?.id || 0, { type: "main" }, !!user);
   const { data: thesis, isLoading } = useThesis(user?.id || 0, { type: "revision" }, !!user);
   const form = useForm<RevisionSubmissionFormInputs>({
     initialValues: {
@@ -85,7 +81,7 @@ function RevisionSubmissionForm() {
         revisionReportFile: thesis?.revisionReportFile ? undefined : null,
       });
     }
-  }, [isLoading]);
+  }, [isLoading]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <form onSubmit={onSubmit(handleSubmit)}>

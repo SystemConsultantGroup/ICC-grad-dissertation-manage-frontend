@@ -44,7 +44,7 @@ function UserInfoEditSection() {
         signFile: user?.signFile ? undefined : null,
       });
     }
-  }, [isLoading]);
+  }, [isLoading]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleSubmit = async (values: UserInfoEditFormInputs) => {
     try {

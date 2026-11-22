@@ -36,6 +36,7 @@ function MainRegisterModal({ studentId, opened, close, token }: Props) {
   const handleSubmit = async () => {
     try {
       if (studentId) {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { basicInfo, ...sysMainValues } = sysMainForm.values;
         const body = {
           thesisTitle: sysMainValues.thesisTitle,
@@ -67,7 +68,7 @@ function MainRegisterModal({ studentId, opened, close, token }: Props) {
       };
       fetchReviewer();
     }
-  }, [studentId, token]);
+  }, [studentId, token]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Modal

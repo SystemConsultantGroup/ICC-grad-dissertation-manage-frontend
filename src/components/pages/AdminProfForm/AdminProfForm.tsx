@@ -40,7 +40,6 @@ function AdminProfForm({ professorId }: Props) {
     onSubmit,
     getInputProps,
     setValues,
-    isDirty,
     setFieldValue,
     values: profValues,
   } = useForm<AdminProfFormInputs>({

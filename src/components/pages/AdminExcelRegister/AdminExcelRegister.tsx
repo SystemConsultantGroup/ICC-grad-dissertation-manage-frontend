@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { uploadFile } from "@/api/_utils/uploadFile";
 import { handleDownloadFile } from "@/api/_utils/handleDownloadFile";
 import { Stack, Button, Switch } from "@mantine/core";
 import { API_ROUTES } from "@/api/apiRoute";

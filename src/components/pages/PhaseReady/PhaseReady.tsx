@@ -8,7 +8,7 @@ export interface PhaseReadyProps {
   after?: boolean;
 }
 
-export default function PhaseReady({ title, start, end, after = false }: PhaseReadyProps) {
+export default function PhaseReady({ title, /* start, end, */ after = false }: PhaseReadyProps) {
   return (
     <Stack align="center" p={32} gap={0}>
       <IconAlertTriangle />

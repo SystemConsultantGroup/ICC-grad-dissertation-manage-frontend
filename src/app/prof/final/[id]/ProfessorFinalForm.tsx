@@ -64,6 +64,7 @@ export function ProfessorFinalForm({
     if (input.commentFile) {
       fileUUID = (await uploadFile(input.commentFile)).uuid;
     } else if (input.commentFile !== null) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       fileUUID = previous.reviewFile?.uuid ?? undefined;
     }
 

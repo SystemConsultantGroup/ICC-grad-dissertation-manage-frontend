@@ -42,6 +42,7 @@ import { TChangeQueryArg } from "../../_types/common";
 function StudentListSection() {
   const { push } = useRouter();
   const [opened, { open, close }] = useDisclosure(false);
+  const [confirmingDelete, setConfirmingDelete] = useState(false);
   const [pageSize, setPageSize] = useState<string | null>(String(PAGE_SIZES[0]));
   const [pageNumber, setPageNumber] = useState(1);
   const pageSizeNumber = Number(pageSize);
@@ -110,6 +111,11 @@ function StudentListSection() {
     confirmDeleteText.target.trim() === "전체학생 삭제" &&
     confirmDeleteText.confirm.trim() === "삭제하겠습니다";
 
+  const handleClose = () => {
+    setConfirmingDelete(false);
+    close();
+  };
+
   const handleDelete = async () => {
     try {
       await logBulkDeletion("students", confirmDeleteText.representative);
@@ -120,7 +126,7 @@ function StudentListSection() {
     try {
       await ClientAxios.delete(API_ROUTES.student.delete());
       showNotificationSuccess({ message: "학생 일괄 삭제 완료" });
-      close();
+      handleClose();
     } catch (error) {
       /* empty */
     }
@@ -128,53 +134,64 @@ function StudentListSection() {
 
   return (
     <Stack>
-      <Modal opened={opened} onClose={close} withCloseButton={false} centered radius="lg">
-        <Stack gap={36} align="center" p="lg">
-          <IconAlertTriangle color="red" />
-          <Group align="center" justify="center">
-            <Text fw={600}>
-              주의! 시스템 상 전체 학생이 삭제됩니다. 학과, 학년, 진행 연도를 무관하고 전부
-              삭제됩니다.
-            </Text>
-            <Text fw={600}>
-              계속하시려면 다음 입력창에 담당자 이름, &lsquo;전체학생 삭제&rsquo;, &lsquo;삭제하겠습니다&rsquo;을
-              작성해주십시오.
-            </Text>
-            <Input
-              value={confirmDeleteText.representative}
-              onChange={(e) =>
-                setConfirmDeleteText((o) => ({ ...o, representative: e.target.value }))
-              }
-              placeholder="일반대학원 학위논문시스템학과 홍길동"
-            />
-            <Input
-              value={confirmDeleteText.target}
-              onChange={(e) => setConfirmDeleteText((o) => ({ ...o, target: e.target.value }))}
-              placeholder="전체학생 삭제"
-            />
-            <Input
-              value={confirmDeleteText.confirm}
-              onChange={(e) => setConfirmDeleteText((o) => ({ ...o, confirm: e.target.value }))}
-              placeholder="삭제하겠습니다"
-            />
-          </Group>
-          <Group>
-            <Button key="cancel" variant="outline" onClick={close}>
-              취소
-            </Button>
-            <Button
-              key="delete"
-              color="red"
-              disabled={!confirmedDeleteText}
-              onClick={() => {
-                if (!confirm("정말 삭제하시겠습니까?")) return;
-                handleDelete();
-              }}
-            >
-              전체 삭제
-            </Button>
-          </Group>
-        </Stack>
+      <Modal opened={opened} onClose={handleClose} withCloseButton={false} centered radius="lg">
+        {confirmingDelete ? (
+          <Stack gap={36} align="center" p="lg">
+            <Text fw={600}>정말 삭제하시겠습니까?</Text>
+            <Group>
+              <Button variant="outline" onClick={() => setConfirmingDelete(false)}>
+                취소
+              </Button>
+              <Button color="red" disabled={!confirmedDeleteText} onClick={handleDelete}>
+                전체 삭제
+              </Button>
+            </Group>
+          </Stack>
+        ) : (
+          <Stack gap={36} align="center" p="lg">
+            <IconAlertTriangle color="red" />
+            <Group align="center" justify="center">
+              <Text fw={600}>
+                주의! 시스템 상 전체 학생이 삭제됩니다. 학과, 학년, 진행 연도를 무관하고 전부
+                삭제됩니다.
+              </Text>
+              <Text fw={600}>
+                계속하시려면 다음 입력창에 담당자 이름, &lsquo;전체학생 삭제&rsquo;,
+                &lsquo;삭제하겠습니다&rsquo;을 작성해주십시오.
+              </Text>
+              <Input
+                value={confirmDeleteText.representative}
+                onChange={(e) =>
+                  setConfirmDeleteText((o) => ({ ...o, representative: e.target.value }))
+                }
+                placeholder="일반대학원 학위논문시스템학과 홍길동"
+              />
+              <Input
+                value={confirmDeleteText.target}
+                onChange={(e) => setConfirmDeleteText((o) => ({ ...o, target: e.target.value }))}
+                placeholder="전체학생 삭제"
+              />
+              <Input
+                value={confirmDeleteText.confirm}
+                onChange={(e) => setConfirmDeleteText((o) => ({ ...o, confirm: e.target.value }))}
+                placeholder="삭제하겠습니다"
+              />
+            </Group>
+            <Group>
+              <Button key="cancel" variant="outline" onClick={handleClose}>
+                취소
+              </Button>
+              <Button
+                key="delete"
+                color="red"
+                disabled={!confirmedDeleteText}
+                onClick={() => setConfirmingDelete(true)}
+              >
+                전체 삭제
+              </Button>
+            </Group>
+          </Stack>
+        )}
       </Modal>
       <SectionHeader
         withPageSizeSelector

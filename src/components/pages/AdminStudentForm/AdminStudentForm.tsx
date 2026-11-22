@@ -304,7 +304,7 @@ function AdminStudentForm({ studentId, token }: Props) {
     if (!isLoading) {
       setIsAdmin(user?.type === "ADMIN");
     }
-  }, [isLoading]);
+  }, [isLoading]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     const fetchPhd = async () => {

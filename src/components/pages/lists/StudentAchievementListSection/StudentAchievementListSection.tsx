@@ -25,8 +25,8 @@ export function formatISSN(issn?: string) {
 
 function StudentAchievementListSection() {
   const { push } = useRouter();
-  const [pageSize, setPageSize] = useState<string | null>(String(PAGE_SIZES[3]));
-  const [pageNumber, setPageNumber] = useState(1);
+  const [pageSize, _setPageSize] = useState<string | null>(String(PAGE_SIZES[3]));
+  const [pageNumber, _setPageNumber] = useState(1);
   const pageSizeNumber = Number(pageSize);
 
   const { data: achievements, isLoading } = useAchievements({

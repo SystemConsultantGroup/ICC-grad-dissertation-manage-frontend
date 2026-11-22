@@ -15,5 +15,6 @@
   },
   "eslint.nodePath": ".yarn/sdks",
   "prettier.prettierPath": ".yarn/sdks/prettier/index.cjs",
-  "typescript.enablePromptUseWorkspaceTsdk": true
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "js/ts.tsdk.path": ".yarn/sdks/typescript/lib"
 }

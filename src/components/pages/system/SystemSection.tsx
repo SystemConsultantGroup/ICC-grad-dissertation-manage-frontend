@@ -1,6 +1,5 @@
 "use client";
 
-import { Clock } from "@/components/common/Clock";
 import { Section } from "@/components/common/Section";
 import { Stack } from "@mantine/core";
 import { TitleRow } from "@/components/common/rows";

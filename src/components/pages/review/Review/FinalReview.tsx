@@ -3,15 +3,7 @@
 import { Button, Group, Stack, Text } from "@mantine/core";
 import Link from "next/link";
 import { UseFormReturnType } from "@mantine/form";
-import {
-  BasicRow,
-  ButtonRow,
-  CommentTypeRow,
-  FileUploadRow,
-  RowGroup,
-  TextAreaRow,
-  TitleRow,
-} from "@/components/common/rows";
+import { BasicRow, ButtonRow, RowGroup, TextAreaRow, TitleRow } from "@/components/common/rows";
 import { Status } from "@/api/_types/common";
 import { File as ApiFile } from "@/api/_types/file";
 import { Dispatch, SetStateAction } from "react";
@@ -29,13 +21,7 @@ export interface FinalReviewProps {
   setCommentType: Dispatch<SetStateAction<string>>;
 }
 
-export function FinalReview({
-  form,
-  previousCommentFile,
-  currentState,
-  commentType,
-  setCommentType,
-}: FinalReviewProps) {
+export function FinalReview({ form, currentState, commentType }: FinalReviewProps) {
   const { status } = form.values;
 
   return (

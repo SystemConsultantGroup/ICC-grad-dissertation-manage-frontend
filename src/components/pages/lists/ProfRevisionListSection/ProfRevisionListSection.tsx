@@ -4,8 +4,7 @@
 
 import Pagination from "@/components/common/Pagination";
 import { SectionHeader } from "@/components/common/SectionHeader";
-import { ActionIcon, Button, Center, Group, Popover, Select, Skeleton, Stack } from "@mantine/core";
-import { IconDownload } from "@tabler/icons-react";
+import { Center, Select, Skeleton, Stack } from "@mantine/core";
 import { useRouter } from "next/navigation";
 import { Table } from "@/components/common/Table";
 import { DepartmentSelect } from "@/components/common/selects/DepartmentSelect";

@@ -56,7 +56,7 @@ function PaperSubmissionForm() {
         presentationFile: thesis?.presentationFile ? undefined : null,
       });
     }
-  }, [isLoading]);
+  }, [isLoading]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleSubmit = async (values: PaperSubmissionFormInputs) => {
     setIsSubmitting(true);

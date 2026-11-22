@@ -53,7 +53,7 @@ function AchievementEditSection({ id, isAdmin }: Props) {
         ISSN2: data.ISSN ? data.ISSN.slice(-4) : "",
       });
     }
-  }, [data]);
+  }, [data]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleSubmit = async (input: AchievementFormInput) => {
     const body = { ...input, ISSN: input.ISSN1 && input.ISSN1 && input.ISSN1 + input.ISSN2 };

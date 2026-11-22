@@ -1,5 +1,4 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { useDisclosure } from "@mantine/hooks";
 import { Stack, TextInput, PasswordInput, Select, Text, Button, Group } from "@mantine/core";
 import { RowGroup, BasicRow, TitleRow, NoticeRow, ButtonRow } from "@/components/common/rows";
 import { UseFormReturnType } from "@mantine/form";
@@ -8,7 +7,6 @@ import { API_ROUTES } from "@/api/apiRoute";
 import { Phase } from "@/api/_types/phase";
 import { DepartmentSelect } from "@/components/common/selects/DepartmentSelect";
 import { AdminStudentFormInputs } from "../_types/AdminStudentForm";
-import MainRegisterModal from "./MainRegisterModal";
 
 interface Props {
   form: UseFormReturnType<AdminStudentFormInputs>;
@@ -60,7 +58,7 @@ function BasicInfoSection({
       }
     };
     fetchStudentDetails();
-  }, [studentId, token]);
+  }, [studentId, token]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     const loadPhase = async () => {

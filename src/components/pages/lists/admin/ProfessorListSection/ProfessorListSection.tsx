@@ -136,8 +136,8 @@ function ProfessorListSection() {
               주의! 시스템상 전체 교수가 삭제됩니다. 학과와 무관하게 전부 삭제됩니다.
             </Text>
             <Text fw={600}>
-              계속하시려면 다음 입력창에 담당자 이름, &lsquo;전체교수 삭제&rsquo;, &lsquo;삭제하겠습니다&rsquo;를
-              작성해주십시오.
+              계속하시려면 다음 입력창에 담당자 이름, &lsquo;전체교수 삭제&rsquo;,
+              &lsquo;삭제하겠습니다&rsquo;를 작성해주십시오.
             </Text>
             <Input
               value={confirmDeleteText.representative}
@@ -166,6 +166,7 @@ function ProfessorListSection() {
               color="red"
               disabled={!confirmedDeleteText}
               onClick={() => {
+                // eslint-disable-next-line no-restricted-globals, no-alert
                 if (!confirm("정말 삭제하시겠습니까?")) return;
                 handleDelete();
               }}

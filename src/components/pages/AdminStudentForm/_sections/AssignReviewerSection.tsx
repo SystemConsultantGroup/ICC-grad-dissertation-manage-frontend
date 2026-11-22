@@ -56,11 +56,10 @@ function AssignReviewerSection({
   phdLoading,
 }: Props) {
   /** 교수 목록, 학과 목록 조회 */
-  const {
-    data: professors,
-    isLoading: isLoadingProf,
-    error: errorProf,
-  } = useProfessors({ pageNumber: PAGE_NUMBER_GET_ALL, pageSize: PAGE_SIZE_GET_ALL }, token);
+  const { data: professors, isLoading: isLoadingProf } = useProfessors(
+    { pageNumber: PAGE_NUMBER_GET_ALL, pageSize: PAGE_SIZE_GET_ALL },
+    token
+  );
 
   const [professorsSelectData, setProfessorsSelectData] = useState<ComboboxData>();
 
@@ -162,7 +161,7 @@ function AssignReviewerSection({
 
     fetchReviewer();
     setProfessorsData();
-  }, [studentId, isLoadingProf, token]);
+  }, [studentId, isLoadingProf, token]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /** 배정된 교수 목록 업데이트 */
   useEffect(() => {
@@ -184,7 +183,7 @@ function AssignReviewerSection({
         label: assignedReviewerLabel("COMMITTEE", Number(committee.profId)),
       })),
     ]);
-  }, [advisors, committees, headReviewer]);
+  }, [advisors, committees, headReviewer]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /** 배정 취소 */
   const handleCancle = () => {

@@ -8,7 +8,7 @@ export interface PhaseReadyAlertRowProps {
   end: string;
 }
 
-export default function PhaseReadyAlertRow({ title, start, end }: PhaseReadyAlertRowProps) {
+export default function PhaseReadyAlertRow({ title /* start, end */ }: PhaseReadyAlertRowProps) {
   return (
     <RowGroup withBorderBottom={false}>
       <Box c="red">

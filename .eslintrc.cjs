@@ -34,5 +34,6 @@ module.exports = {
     "@typescript-eslint/no-non-null-assertion": "off",
     "@typescript-eslint/no-this-alias": "off",
     "@typescript-eslint/return-await": "off",
+    "no-console": "off",
   },
 };

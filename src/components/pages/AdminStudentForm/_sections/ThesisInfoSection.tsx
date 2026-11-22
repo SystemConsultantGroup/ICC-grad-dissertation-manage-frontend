@@ -3,7 +3,7 @@ import { Stack, TextInput, Group } from "@mantine/core";
 import { API_ROUTES } from "@/api/apiRoute";
 import { ClientAxios } from "@/api/ClientAxios";
 import { RowGroup, BasicRow, TitleRow } from "@/components/common/rows";
-import { ApiDownloadButton, DownloadButton } from "@/components/common/Buttons";
+import { ApiDownloadButton } from "@/components/common/Buttons";
 import { ThesisInfo } from "@/api/_types/reviews";
 import { File } from "@/api/_types/file";
 

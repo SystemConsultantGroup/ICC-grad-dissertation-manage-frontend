@@ -26,7 +26,7 @@ import { SectionHeader } from "@/components/common/SectionHeader";
 import { IconDownload } from "@tabler/icons-react";
 import { Table } from "@/components/common/Table";
 import Pagination from "@/components/common/Pagination";
-import { PagedProfReviewsRequestQuery, PagedReviewsRequestQuery } from "@/api/_types/reviews";
+import { PagedProfReviewsRequestQuery } from "@/api/_types/reviews";
 import useReviews from "@/api/SWR/useReviews";
 import { DATE_TIME_FORMAT_HYPHEN } from "@/constants/date";
 import { DepartmentSelect } from "@/components/common/selects/DepartmentSelect";
