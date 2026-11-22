@@ -10,6 +10,10 @@ export const API_ROUTES = {
     get: (uuid: ApiId) => `/files/${uuid}`,
     post: () => "/files", // POST: 파일 업로드
     delete: (uuid: ApiId) => `/files/${uuid}`, // DELETE: 파일 삭제
+    reupload: {
+      getMe: () => "/files/reupload/me", // GET: 재업로드 대상 파일 조회 (학생)
+      put: (uuid: ApiId) => `/files/reupload/${uuid}`, // PUT: 유실된 제출 파일 재업로드 (학생)
+    },
   },
   phase: {
     get: () => "/phases", // GET: 시스템 일정 목록 조회
