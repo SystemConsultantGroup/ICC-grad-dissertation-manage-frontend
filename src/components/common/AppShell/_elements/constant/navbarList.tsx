@@ -11,6 +11,7 @@ import {
   IconFileCheck,
   IconMicroscope,
   IconCircleCheck,
+  IconUpload,
 } from "@tabler/icons-react";
 import { ReactNode } from "react";
 
@@ -83,6 +84,11 @@ export const STUDENT_NAVBAR_LIST = (modificationFlag?: boolean) => {
     { label: "메인", href: "/", icon: <IconHome size="24" stroke={1} /> },
     { label: "논문 투고", href: "/student/write", icon: <IconFileText size="24" stroke={1} /> },
     {
+      label: "파일 재업로드",
+      href: "/student/reupload",
+      icon: <IconUpload size="24" stroke={1} />,
+    },
+    {
       label: "심사 결과 확인",
       href: "/student/result",
       icon: <IconProgressCheck size="24" stroke={1} />,
@@ -100,7 +106,7 @@ export const STUDENT_NAVBAR_LIST = (modificationFlag?: boolean) => {
   ];
 
   if (modificationFlag) {
-    navbarList.splice(3, 0, {
+    navbarList.splice(4, 0, {
       label: "수정사항 제출",
       href: "/student/revision",
       icon: <IconFileCheck size="24" stroke={1} />,

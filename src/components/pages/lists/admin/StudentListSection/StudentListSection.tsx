@@ -137,8 +137,8 @@ function StudentListSection() {
               삭제됩니다.
             </Text>
             <Text fw={600}>
-              계속하시려면 다음 입력창에 담당자 이름, &lsquo;전체학생 삭제&rsquo;, &lsquo;삭제하겠습니다&rsquo;을
-              작성해주십시오.
+              계속하시려면 다음 입력창에 담당자 이름, &lsquo;전체학생 삭제&rsquo;,
+              &lsquo;삭제하겠습니다&rsquo;을 작성해주십시오.
             </Text>
             <Input
               value={confirmDeleteText.representative}
@@ -167,7 +167,7 @@ function StudentListSection() {
               color="red"
               disabled={!confirmedDeleteText}
               onClick={() => {
-                if (!confirm("정말 삭제하시겠습니까?")) return;
+                if (!window.confirm("정말 삭제하시겠습니까?")) return;
                 handleDelete();
               }}
             >
