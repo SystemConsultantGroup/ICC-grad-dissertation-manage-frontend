@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
-import { Badge, Button, Checkbox, FileInput, Group, Loader, Stack, Text } from "@mantine/core";
-import { IconMail, IconUpload } from "@tabler/icons-react";
-import { NoticeRow, RowGroup, TitleRow } from "@/components/common/rows";
+import { ReactNode, useState } from "react";
+import { Badge, Box, Button, Checkbox, FileInput, Group, Loader, Stack, Text } from "@mantine/core";
+import { IconInfoCircle, IconMessageQuestion, IconUpload } from "@tabler/icons-react";
+import { RowGroup, TitleRow } from "@/components/common/rows";
 import Row from "@/components/common/rows/_elements/Row/Row";
 import { ClientAxios } from "@/api/ClientAxios";
 import { API_ROUTES } from "@/api/apiRoute";
@@ -25,12 +25,35 @@ const STATUS_BADGE: Record<ReuploadStatus, { color: string; label: string }> = {
   OK: { color: "gray", label: "정상 보관" },
 };
 
-const CONTACT_EMAIL = "scg@scg.skku.ac.kr";
-
 const getExtension = (name: string) => {
   const dot = name.lastIndexOf(".");
   return dot >= 0 ? name.slice(dot).toLowerCase() : "";
 };
+
+/**
+ * 공통 NoticeRow 는 한 줄 안내용이라 위아래 여백이 없어,
+ * 여러 줄 안내에 맞게 여백과 아이콘 정렬만 조정한 행.
+ */
+function NoticeBlock({
+  icon,
+  children,
+  withBorderBottom = true,
+}: {
+  icon: ReactNode;
+  children: ReactNode;
+  withBorderBottom?: boolean;
+}) {
+  return (
+    <RowGroup py="md" withBorderBottom={withBorderBottom}>
+      <Group gap="md" align="flex-start" wrap="nowrap">
+        <Box pt={2} style={{ flexShrink: 0, lineHeight: 0 }}>
+          {icon}
+        </Box>
+        {children}
+      </Group>
+    </RowGroup>
+  );
+}
 
 function ReuploadForm() {
   const { data: targets, isLoading, mutate } = useReuploadTargets();
@@ -78,35 +101,35 @@ function ReuploadForm() {
           )
         }
       />
-      <NoticeRow
-        text={
-          <Stack gap={4}>
-            <Text>
-              논문 관리 시스템 저장 서버 장애로 제출하신 파일의 사본 일부를 다시 받고 있습니다.
-            </Text>
-            <Text>
-              제출 기록, 최초 제출 시각, 심사 진행 상황은 모두 그대로 유지되며 재업로드로 인한
-              불이익은 없습니다.
-            </Text>
-            <Text fw={600}>당시 제출하신 파일과 동일한 파일을 올려 주세요.</Text>
-          </Stack>
-        }
-      />
+      <NoticeBlock icon={<IconInfoCircle size={24} />}>
+        <Stack gap={6}>
+          <Text>
+            논문 관리 시스템 저장 서버 장애로 제출하신 파일의 사본 일부를 다시 받고 있습니다.
+          </Text>
+          <Text>
+            제출 기록, 최초 제출 시각, 심사 진행 상황은 모두 그대로 유지되며 재업로드로 인한
+            불이익은 없습니다.
+          </Text>
+          <Text fw={600}>당시 제출하신 파일과 동일한 파일을 올려 주세요.</Text>
+        </Stack>
+      </NoticeBlock>
 
       {isLoading && (
-        <RowGroup>
-          <Group justify="center" w="100%" py="md">
+        <RowGroup py="lg">
+          <Group justify="center" w="100%">
             <Loader size="sm" />
           </Group>
         </RowGroup>
       )}
 
       {!isLoading && targets?.length === 0 && (
-        <NoticeRow text={<Text>제출하신 파일이 없어 재업로드할 항목이 없습니다.</Text>} />
+        <NoticeBlock icon={<IconInfoCircle size={24} />}>
+          <Text>제출하신 파일이 없어 재업로드할 항목이 없습니다.</Text>
+        </NoticeBlock>
       )}
 
       {!isLoading && actionableCount > 0 && (
-        <RowGroup>
+        <RowGroup py="md">
           <Checkbox
             checked={confirmed}
             onChange={(event) => setConfirmed(event.currentTarget.checked)}
@@ -122,26 +145,28 @@ function ReuploadForm() {
         const extension = getExtension(name);
 
         return (
-          <RowGroup key={uuid}>
+          <RowGroup key={uuid} py="lg">
             <Row
               field={`${STAGE_LOOKUP_TABLE[target.stage]} ${FILE_TYPE_LABEL[target.type]}`}
               fieldSize="lg"
               flexStart
             >
-              <Stack gap={8}>
-                <Group gap={8}>
-                  <Badge color={badge.color} variant="light">
-                    {badge.label}
-                  </Badge>
-                  <Text fw={500}>{name}</Text>
-                </Group>
-                <Text size="sm" c="dimmed">
-                  최초 제출: {formatTime(new Date(createdAt))}
-                  {target.reuploadedAt &&
-                    ` · 재업로드: ${formatTime(new Date(target.reuploadedAt))} (${
-                      target.reuploadedName
-                    })`}
-                </Text>
+              <Stack gap={12}>
+                <Stack gap={4}>
+                  <Group gap={8}>
+                    <Badge color={badge.color} variant="light">
+                      {badge.label}
+                    </Badge>
+                    <Text fw={500}>{name}</Text>
+                  </Group>
+                  <Text size="sm" c="dimmed">
+                    최초 제출: {formatTime(new Date(createdAt))}
+                    {target.reuploadedAt &&
+                      ` · 재업로드: ${formatTime(new Date(target.reuploadedAt))} (${
+                        target.reuploadedName
+                      })`}
+                  </Text>
+                </Stack>
                 {target.status !== "OK" && (
                   <Group gap={16}>
                     <FileInput
@@ -171,16 +196,12 @@ function ReuploadForm() {
         );
       })}
 
-      <NoticeRow
-        icon={<IconMail size={24} />}
-        withBorderBottom={false}
-        text={
-          <Text size="sm">
-            원본 파일이 없으시거나 업로드에 문제가 있으면 {CONTACT_EMAIL} 로 학번과 함께 문의해
-            주세요.
-          </Text>
-        }
-      />
+      <NoticeBlock icon={<IconMessageQuestion size={24} />} withBorderBottom={false}>
+        <Text size="sm">
+          원본 파일이 없으시거나 업로드에 문제가 있는 등 기타 문의 사항은 관할 행정실로 문의해
+          주세요.
+        </Text>
+      </NoticeBlock>
     </Stack>
   );
 }
