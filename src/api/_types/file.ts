@@ -57,3 +57,28 @@ export interface AdminReuploadStatusResponse extends CommonApiResponse {
   summary: AdminReuploadSummary;
   items: AdminReuploadStudent[];
 }
+
+export type SignReuploadStatus = "MISSING" | "UPLOADED" | "NONE";
+
+export interface AdminSignReuploadProfessor {
+  professorId: number;
+  loginId: string;
+  name: string;
+  department: string | null;
+  email: string | null;
+  status: SignReuploadStatus;
+  signUploadedAt: string | null;
+  assignedStudentCount: number;
+}
+
+export interface AdminSignReuploadSummary {
+  professorCount: number;
+  missingCount: number;
+  uploadedCount: number;
+  noneCount: number;
+}
+
+export interface AdminSignReuploadStatusResponse extends CommonApiResponse {
+  summary: AdminSignReuploadSummary;
+  items: AdminSignReuploadProfessor[];
+}

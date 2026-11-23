@@ -13,6 +13,7 @@ export const API_ROUTES = {
     reupload: {
       getMe: () => "/files/reupload/me", // GET: 재업로드 대상 파일 조회 (학생)
       getAll: () => "/files/reupload", // GET: 전체 학생 재업로드 현황 (관리자)
+      getSigns: () => "/files/reupload/signs", // GET: 교수 서명(도장) 재업로드 현황 (관리자)
       put: (uuid: ApiId) => `/files/reupload/${uuid}`, // PUT: 유실된 제출 파일 재업로드 (학생)
     },
   },
