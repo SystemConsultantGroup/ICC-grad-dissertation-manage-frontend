@@ -68,3 +68,14 @@ export const PROF_REVISION_TABLE_HEADERS: TableHeaderProps[] = [
   { label: "논문 제목", widthPercentage: 25 },
   { label: "확인 여부", widthPercentage: 7 },
 ];
+
+export const REUPLOAD_STATUS_TABLE_HEADERS: TableHeaderProps[] = [
+  { label: "순번", widthPercentage: 6 },
+  { label: "학번", widthPercentage: 12 },
+  { label: "이름", widthPercentage: 10 },
+  { label: "학과", widthPercentage: 22 },
+  { label: "남은 파일", widthPercentage: 9 },
+  { label: "완료 파일", widthPercentage: 9 },
+  { label: "상태", widthPercentage: 10 },
+  { label: "최근 재업로드", widthPercentage: 16 },
+];

@@ -23,3 +23,37 @@ export interface ReuploadTarget {
 export interface ReuploadTargetResponse extends CommonApiResponse {
   items: ReuploadTarget[];
 }
+
+export interface AdminReuploadFile {
+  thesisFileId: number;
+  stage: Stage;
+  type: ReuploadTarget["type"];
+  fileName: string | null;
+  status: ReuploadStatus;
+  reuploadedAt: string | null;
+}
+
+export interface AdminReuploadStudent {
+  studentId: number;
+  loginId: string;
+  name: string;
+  department: string | null;
+  missingCount: number;
+  reuploadedCount: number;
+  okCount: number;
+  lastReuploadedAt: string | null;
+  files: AdminReuploadFile[];
+}
+
+export interface AdminReuploadSummary {
+  studentCount: number;
+  affectedStudentCount: number;
+  completedStudentCount: number;
+  missingFileCount: number;
+  reuploadedFileCount: number;
+}
+
+export interface AdminReuploadStatusResponse extends CommonApiResponse {
+  summary: AdminReuploadSummary;
+  items: AdminReuploadStudent[];
+}
