@@ -7,4 +7,5 @@ export { default as useReviews } from "./useReviews";
 export { default as useStudents } from "./useStudents";
 export { default as useRevision } from "./useRevisions";
 export { default as useReuploadTargets } from "./useReuploadTargets";
+export { default as useAdminReuploadStatus } from "./useAdminReuploadStatus";
 export { useConditionalSWR } from "./useConditionalSWR";

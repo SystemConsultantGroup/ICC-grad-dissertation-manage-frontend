@@ -12,6 +12,7 @@ export const API_ROUTES = {
     delete: (uuid: ApiId) => `/files/${uuid}`, // DELETE: 파일 삭제
     reupload: {
       getMe: () => "/files/reupload/me", // GET: 재업로드 대상 파일 조회 (학생)
+      getAll: () => "/files/reupload", // GET: 전체 학생 재업로드 현황 (관리자)
       put: (uuid: ApiId) => `/files/reupload/${uuid}`, // PUT: 유실된 제출 파일 재업로드 (학생)
     },
   },

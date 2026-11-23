@@ -64,6 +64,11 @@ export const ADMIN_NAVBAR_LIST: Props[] = [
     icon: <IconCircleCheck size="24" stroke={1} />,
   },
   {
+    label: "파일 재업로드 현황",
+    href: "/admin/reupload",
+    icon: <IconUpload size="24" stroke={1} />,
+  },
+  {
     label: "학과 관리",
     href: "/admin/department",
     icon: <IconSchool size="24" stroke={1} />,
