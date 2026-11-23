@@ -8,4 +8,5 @@ export { default as useStudents } from "./useStudents";
 export { default as useRevision } from "./useRevisions";
 export { default as useReuploadTargets } from "./useReuploadTargets";
 export { default as useAdminReuploadStatus } from "./useAdminReuploadStatus";
+export { default as useAdminSignReuploadStatus } from "./useAdminSignReuploadStatus";
 export { useConditionalSWR } from "./useConditionalSWR";

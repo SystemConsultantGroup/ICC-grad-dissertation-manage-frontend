@@ -79,3 +79,14 @@ export const REUPLOAD_STATUS_TABLE_HEADERS: TableHeaderProps[] = [
   { label: "상태", widthPercentage: 10 },
   { label: "최근 재업로드", widthPercentage: 16 },
 ];
+
+export const SIGN_REUPLOAD_STATUS_TABLE_HEADERS: TableHeaderProps[] = [
+  { label: "순번", widthPercentage: 6 },
+  { label: "아이디", widthPercentage: 12 },
+  { label: "이름", widthPercentage: 10 },
+  { label: "학과", widthPercentage: 20 },
+  { label: "이메일", widthPercentage: 18 },
+  { label: "심사 학생", widthPercentage: 8 },
+  { label: "서명 상태", widthPercentage: 10 },
+  { label: "서명 업로드", widthPercentage: 16 },
+];

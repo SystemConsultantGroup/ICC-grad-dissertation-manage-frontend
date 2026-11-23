@@ -12,6 +12,7 @@ import {
   IconMicroscope,
   IconCircleCheck,
   IconUpload,
+  IconSignature,
 } from "@tabler/icons-react";
 import { ReactNode } from "react";
 
@@ -67,6 +68,11 @@ export const ADMIN_NAVBAR_LIST: Props[] = [
     label: "파일 재업로드 현황",
     href: "/admin/reupload",
     icon: <IconUpload size="24" stroke={1} />,
+  },
+  {
+    label: "서명 재업로드 현황",
+    href: "/admin/sign-reupload",
+    icon: <IconSignature size="24" stroke={1} />,
   },
   {
     label: "학과 관리",
